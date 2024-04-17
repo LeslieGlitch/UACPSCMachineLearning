@@ -8,7 +8,7 @@ project(MachineLearning)
 
 # MachineLearning
 add_executable(MachineLearning)
-target_sources(MachineLearning PRIVATE main.cpp LinearList.cpp Backpropagation.cpp)
+target_sources(MachineLearning PRIVATE main.cpp Link.cpp Backpropagation.cpp)
 target_compile_features(MachineLearning PRIVATE cxx_std_17)
 target_compile_options(MachineLearning PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/Wall>
