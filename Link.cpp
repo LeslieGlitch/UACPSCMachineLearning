@@ -13,8 +13,27 @@
 /// @param[in] v Value to add
 /// @param[in] p Link to predecessor
 /// @param[in] s Link to successor
-Link::Link(const std::string& v, Link* p = nullptr, Link* s = nullptr)
+Link::Link(const double& v, Link* p, Link* s)
     : value{v}, prev{p}, succ{s} { }
+
+// value getter
+double Link::getValue() {
+    return value;
+}
+
+// prev getter
+double Link::getPrev() {
+    if (prev != nullptr)
+        return prev->value;
+    return 88.0;
+}
+
+// succ getter
+double Link::getSucc() {
+    if (succ != nullptr)
+        return succ->value;
+    return 99.0;
+}
 
 // insert n before p; return n
 Link* Link::insert(Link* p, Link* n) {
@@ -62,7 +81,7 @@ Link *Link::erase(Link *p) {
 }
 
 // find s in list; return nullptr for “not found”
-Link *Link::find(Link *p, const std::string &s) {
+Link *Link::find(Link *p, const double &s) {
     while (p) {
         if (p->value == s)
             return p;

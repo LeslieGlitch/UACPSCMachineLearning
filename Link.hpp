@@ -13,7 +13,7 @@
 
 class Link {
 private:
-    std::string value;
+    double value;
     Link* prev;
     Link* succ;
 public:
@@ -21,20 +21,35 @@ public:
     /// @param[in] v Value to add
     /// @param[in] p Link to predecessor
     /// @param[in] s Link to successor
-    Link(const std::string& v, Link* p, Link* s);
+    Link(const double& v, Link* p = nullptr, Link* s = nullptr);
+
+    // value getter
+    double getValue();
+
+    // prev getter
+    double getPrev();
+
+    // succ getter
+    double getSucc();
 
     // insert n before p; return n
-    /// @param[in] 
+    /// @param[in] p Reference link
+    /// @param[in] n Link to be inserted
     Link* insert(Link* p, Link* n);
 
     // insert n after p; return n
+    /// @param[in] p Reference link
+    /// @param[in] n Link to be inserted
     Link *add(Link *p, Link *n);
 
     // remove *p from list; return p’s successor
+    /// @param[in] p Link to erase
     Link *erase(Link *p);
 
     // find s in list; return nullptr for “not found”
-    Link *find(Link *p, const std::string &s);
+    /// @param[in] p Reference link
+    /// @param[in] s Value to search for
+    Link *find(Link *p, const double &s);
 
     // move n positions in list; return nullptr for “not found”
     // positive n moves forward, negative backward
