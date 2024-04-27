@@ -13,8 +13,8 @@
 /// @param[in] v Value to add
 /// @param[in] p Link to predecessor
 /// @param[in] s Link to successor
-Link::Link(const double& v, Link* p, Link* s)
-    : value{v}, prev{p}, succ{s} { }
+Link::Link(const double& v, const std::string& label, Link* p, Link* s)
+    : value{v}, label{label}, prev{p}, succ{s} { }
 
 // value getter
 double Link::getValue() {
@@ -113,7 +113,7 @@ Link *Link::advance(Link *p, int n) {
 void Link::print_all(Link* p) {
     std::cout << "{ ";
     while (p) {
-        std::cout << p->value;
+        std::cout << p->label << ": " << p->value;
         if ((p=p->succ))
             std::cout << ", ";
     }

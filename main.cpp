@@ -8,16 +8,20 @@
 #include "Link.hpp"
 #include "Backpropagation.hpp"
 #include <iostream>
+#include <string>
 
 const double START_NUM = 0.5;
-const int NUM_DIVISIONS = 3;
+const int NUM_ITERATIONS = 3;
 double customFunc(double val);
 
 int main() {
     // Create list
-    Link* list = new Link(START_NUM);
-    for (int i=0; i < NUM_DIVISIONS; ++i) {
-        list = list->insert(list, new Link(customFunc(list->getValue())));
+    std::string label = "Iter ";
+    std::string labelStart = "Iter 0";
+    Link* list = new Link(START_NUM, labelStart);
+    for (int i=0; i < NUM_ITERATIONS; ++i) {
+        std::string labelIter = label + std::to_string(i + 1);
+        list = list->insert(list, new Link(customFunc(list->getValue()), labelIter));
     }
 
     // Print data to user

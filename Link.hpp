@@ -14,6 +14,7 @@
 class Link {
 private:
     double value;
+    std::string label;
     Link* prev;
     Link* succ;
 public:
@@ -21,7 +22,7 @@ public:
     /// @param[in] v Value to add
     /// @param[in] p Link to predecessor
     /// @param[in] s Link to successor
-    Link(const double& v, Link* p = nullptr, Link* s = nullptr);
+    Link(const double& v, const std::string& label = "", Link* p = nullptr, Link* s = nullptr);
 
     // value getter
     double getValue();
