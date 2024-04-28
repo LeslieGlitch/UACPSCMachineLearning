@@ -22,17 +22,13 @@ double Link::getValue() {
 }
 
 // prev getter
-double Link::getPrev() {
-    if (prev != nullptr)
-        return prev->value;
-    return 88.0;
+Link* Link::getPrev() {
+    return prev;
 }
 
 // succ getter
-double Link::getSucc() {
-    if (succ != nullptr)
-        return succ->value;
-    return 99.0;
+Link* Link::getSucc() {
+    return succ;
 }
 
 // insert n before p; return n
@@ -113,7 +109,9 @@ Link *Link::advance(Link *p, int n) {
 void Link::print_all(Link* p) {
     std::cout << "{ ";
     while (p) {
-        std::cout << p->label << ": " << p->value;
+        if (p->label != "")
+            std::cout << p->label << ": ";
+        std::cout <<  p->value;
         if ((p=p->succ))
             std::cout << ", ";
     }

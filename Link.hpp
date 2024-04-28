@@ -28,10 +28,10 @@ public:
     double getValue();
 
     // prev getter
-    double getPrev();
+    Link* getPrev();
 
     // succ getter
-    double getSucc();
+    Link* getSucc();
 
     // insert n before p; return n
     /// @param[in] p Reference link

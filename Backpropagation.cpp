@@ -8,3 +8,15 @@
 */
 
 #include "Backpropagation.hpp"
+#include <cmath>
+
+double Backpropagation::backPropagate(Link*& x, double bias, double slope) {
+    // implement before stuff
+    if (x->getSucc() == nullptr) {
+        // Activation function
+        return abs(tanh(x->getValue()) - bias);
+    } else {
+        x = x->getSucc();
+        return backPropagate(x, bias, (slope / 10));
+    }
+}
