@@ -10,13 +10,17 @@
 #include "Backpropagation.hpp"
 #include <cmath>
 
-double Backpropagation::backPropagate(Link*& x, double bias, double slope) {
-    // implement before stuff
-    if (x->getSucc() == nullptr) {
-        // Activation function
-        return abs(tanh(x->getValue()) - bias);
+double Backpropagation::backPropagate(Link*& list, const double& x, const double& bias, double slope) {
+    if (list->getSucc() == nullptr) {
+        // End of leaf node, slope = Activation function
+        slope = std::abs(std::tanh(x) + bias);
+        list->setValue(slope);
+        return slope;
     } else {
-        x = x->getSucc();
-        return backPropagate(x, bias, (slope / 10));
+        list = list->getSucc();
+        slope = 10 * backPropagate(list, x, bias, slope);
+        list = list->getPrev();
+        list->setValue(slope);
+        return slope;
     }
 }

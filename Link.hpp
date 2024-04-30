@@ -27,6 +27,9 @@ public:
     // value getter
     double getValue();
 
+    // value setter
+    void setValue(double val);
+
     // prev getter
     Link* getPrev();
 

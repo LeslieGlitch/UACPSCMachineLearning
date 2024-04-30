@@ -12,45 +12,62 @@
 
 // Settings
 const double START_NUM = 0.5;
-const int NUM_ITERATIONS = 3;
-const double BIAS = 100.0;
-const double START_SLOPE = 100.0;
+const int NUM_ITERATIONS = 4;
+const double BIAS = -0.5;
+const double START_SLOPE = 0.5;
 double customFunc(double val);
 
 int main() {
     // Create list
-    std::string label = "Iter ";
-    std::string labelStart = "Iter 0";
+    std::string label[] = {"Thor", "Odin", "Freyja", "Asgard"};
+    std::string labelStart = "Loki";
     Link* list = new Link(START_NUM, labelStart);
     for (int i=0; i < NUM_ITERATIONS; ++i) {
-        std::string labelIter = label + std::to_string(i + 1);
-        list = list->insert(list, new Link(customFunc(list->getValue()), labelIter));
+        list = list->insert(list, new Link(customFunc(list->getValue()), label[i]));
     }
 
-    // Create list with a range of value
-    Link* list2 = new Link(0.0);
-    for (int i = 1; i <= 10; ++i) {
-        list2 = list2->insert(list2, new Link(i / 10.0));
-    }/*
-    // Return list2 to start
-    while (list2->getPrev() != nullptr) {
-        list2 = list2->getPrev();
-    }*/
+    // Print settings for user
+    std::cout << "Settings:\n";
+    std::cout << "- Bias: "           << BIAS        << "\n";
+    std::cout << "- Starting Slope: " << START_SLOPE << "\n\n";
 
     // Backpropagate
-    double output = Backpropagation::backPropagate(list2, BIAS, START_SLOPE);
+    double azimuth[] = {0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
+    double output[11];
+    double azimuthBest;
+    double bestSlope = 99999;
+    for (int i = 0; i < 11; ++i) {
+        // Return list to start
+        while (list->getPrev() != nullptr) {
+            list = list->getPrev();
+        }
 
-    // Return list2 to start
-    while (list2->getPrev() != nullptr) {
-        list2 = list2->getPrev();
+        double outputCurrent = Backpropagation::backPropagate(list, azimuth[i], BIAS, START_SLOPE);
+        output[i] = outputCurrent;
+
+        // See if best value
+        if (list->getValue() < bestSlope) {
+            azimuthBest = azimuth[i];
+            bestSlope = list->getValue();
+        }
+
+        // Return list to start
+        while (list->getPrev() != nullptr) {
+            list = list->getPrev();
+        }
+
+        // Print data to user
+        std::cout << "Azimuth: " << azimuth[i] << "\n";
+        list->print_all(list);
+        std::cout << std::endl;
+        std::cout << "Backpropagation output: "<< output[i];
+        std::cout << "\n\n";
     }
     
-    // Print data to user
-    list->print_all(list);
-    std::cout << std::endl;
-    list2->print_all(list2);
-    std::cout << std::endl;
-    std::cout << "Final backpropagation output: " << output << std::endl;
+    // Best results
+    std::cout << "The lowest error came from an azimuth of " << azimuthBest << "\n";
+    std::cout << "Here, Asgard had a slope of " << bestSlope << "\n";
+    
     return 0;
 }
 

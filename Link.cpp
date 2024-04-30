@@ -21,6 +21,11 @@ double Link::getValue() {
     return value;
 }
 
+// value setter
+void Link::setValue(double val) {
+    value = val;
+}
+
 // prev getter
 Link* Link::getPrev() {
     return prev;

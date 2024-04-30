@@ -18,7 +18,7 @@ public:
     /// @param[in] x List to be traversed
     /// @param[in] bias The bias
     /// @param[in] slope Starting slope of the backpropagation
-    static double backPropagate(Link*& x, double bias, double slope);
+    static double backPropagate(Link*& list, const double& x, const double& bias, double slope);
 };
 
 #endif
